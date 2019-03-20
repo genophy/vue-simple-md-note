@@ -1,29 +1,10 @@
 # vue-simple-md-note
 
-## Project setup
-```
-npm install
-```
+[live demo](http://520space.com:5600/)
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+See  [ng release](https://github.com/genophy/ng-simple-md-note)
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## just a vue project like ng-simple-md-note
+no auth no editor
 
-### Run your tests
-```
-npm run test
-```
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

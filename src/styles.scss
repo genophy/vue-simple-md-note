@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height : 100%; }
+
+body { margin : 0; font-family : Roboto, "Helvetica Neue", sans-serif; }
+
+//$--color-primary: dark;
+$--color-primary: #222 !default;
+$--font-path: '~element-ui/lib/theme-chalk/fonts';
+@import "~element-ui/packages/theme-chalk/src/index";
+
+@import "styles/font";
+@import "styles/reset";
+@import "styles/basic.css";
+@import "styles/user-custom";
+@import "styles/hljs-theme";

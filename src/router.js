@@ -1,25 +1,66 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Home from './views/Home.vue'
+import Vue          from 'vue';
+import Router       from 'vue-router';
+import BlogList     from './components/BlogList';
+import BlogMdEditor from './components/BlogMdEditor';
+import BlogMdViewer from './components/BlogMdViewer';
+import SetAccount   from './components/settings/SetAccount';
+import SetCategory  from './components/settings/SetCategory';
+import SetPwd       from './components/settings/SetPwd';
+import Settings     from './components/settings/Settings';
+import Blank        from './views/Blank';
+import Login        from './views/Login';
+import Main         from './views/Main';
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
-  mode: 'history',
-  base: process.env.BASE_URL,
+  mode  : 'history',
+  base  : process.env.BASE_URL,
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: Home
+      path    : '/',
+      redirect: '/main',
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
-    }
-  ]
-})
+      path     : '/main',
+      component: Main,
+      children : [
+        {
+          path    : '',
+          redirect: 'blog-list',
+        },
+        {
+          path     : 'blog-list',
+          component: BlogList,
+        },
+        {
+          path     : 'blog-md-editor/:id',
+          component: BlogMdEditor,
+        },
+        {
+          path     : 'blog-md-viewer/:id',
+          component: BlogMdViewer,
+        },
+        {
+          path     : 'settings',
+          component: Settings,
+          children : [
+
+            {path: 'set-account', component: SetAccount},
+            {path: 'set-category', component: SetCategory},
+            {path: 'set-pwd', component: SetPwd},
+          ],
+        },
+
+        {
+          path     : 'about',
+          component: () => import(/* webpackChunkName: "about" */ './components/About.vue'),
+        },
+      ],
+
+    },
+    {path: '/login', component: Login},
+    {path: '/blank', component: Blank},
+    {path: '**', redirect: '/'},
+  ],
+});
