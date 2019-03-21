@@ -45,7 +45,7 @@ export default new Router({
           path     : 'settings',
           component: Settings,
           children : [
-
+            {path:'',redirect:'set-account'},
             {path: 'set-account', component: SetAccount},
             {path: 'set-category', component: SetCategory},
             {path: 'set-pwd', component: SetPwd},

@@ -1,7 +1,7 @@
-import axios          from 'axios';
-import ApiUtil        from './ApiUtil';
-import * as Constants from './Constants';
-import CookieUtil     from './CookieUtil';
+import axios      from 'axios';
+import ApiUtil    from './ApiUtil';
+import Constants  from './Constants';
+import CookieUtil from './CookieUtil';
 
 axios.defaults.timeout = 30000;
 axios.defaults.baseURL = '';
@@ -58,10 +58,10 @@ export function postWithFn(url, fnName, params = {}) {
  */
 
 export function post(url, data = {}) {
+
   return new Promise((resolve, reject) => {
     axios.post(url, data)
     .then(response => {
-
       const value = response.data;
       const res = ApiUtil.responseStatus(value);
 

@@ -14,10 +14,34 @@
                     </div>
                 </div>
 
-                <div class="flex-row">
+                <div class="flex-row ">
+                    <button type="button" class="font-old-stamper bg-color-dark color-gray-light-soft tappable" @click="btnGotoLogin()" v-if="false ===isLogin"> login</button>
 
+                    <div class="m-r-50">
+                        <el-button type="primary" v-if="true === isLogin">
+                            <i class="el-icon-arrow-down el-icon-circle-plus-outline"></i> New
+                        </el-button>
+                    </div>
+
+                    <el-dropdown trigger="click" @command="handleCommand" v-if="true === isLogin">
+                        <el-button type="primary" class="p-a-10">
+                            <i class="el-icon-arrow-down el-icon-circle-plus-outline"></i>USER
+                        </el-button>
+                        <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item command="setting">Setting</el-dropdown-item>
+                            <el-dropdown-item command="exit">Exit</el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>
+
+                    <!--<el-menu :default-active="activeIndex" class="el-menu-dark" mode="horizontal" @select="handleSelect">
+
+                        <el-submenu index="2">
+                            <template slot="title">USER</template>
+                            <el-menu-item index="2-1">Setting</el-menu-item>
+                            <el-menu-item index="2-2">Exit</el-menu-item>
+                        </el-submenu>
+                    </el-menu>-->
                 </div>
-
             </div>
         </div>
 
@@ -35,28 +59,52 @@
 </template>
 
 <script>
-  import * as  Constants from '../util/Constants';
-  import CookieUtil      from '../util/CookieUtil';
+  import AuthService from '../service/auth.service';
+  import Constants   from '../util/Constants';
+  import CookieUtil  from '../util/CookieUtil';
 
   export default {
     name   : 'Main',
     data   : () => ({
       isLogin: !!CookieUtil.cookie(Constants.COOKIE_USER_TOKEN),
     }),
-    created: () => {
-      // this.isLogin =
+    created() {
+      // this.isLogin = !!CookieUtil.cookie(Constants.COOKIE_USER_TOKEN);
     },
     methods: {
-      btnGotoHomePage  : function() {
+      btnGotoHomePage() {
         this.$router.push({path: '/'});
       },
-      btnGotoMyBlogList: function() {
+      btnGotoMyBlogList() {
 
       },
-      btnGotoAbout     : function() {
+      btnGotoAbout() {
         this.$router.push({path: '/main/about'});
       },
+      btnGotoLogin() {
+        this.$router.push({path: '/login'});
+      },
 
+      handleCommand(command) {
+        switch (command) {
+          case 'setting':
+            this.btnGotoSetting();
+            break;
+          case 'exit':
+            this.btnExit();
+            break;
+        }
+      },
+      btnGotoSetting() {
+        this.$router.push({path:'/main/settings'})
+      },
+
+      btnExit() {
+        AuthService.logOut().then(() => {
+
+          this.$router.push({path: '/login'});
+        });
+      },
     },
   };
 </script>
@@ -72,4 +120,8 @@
         z-index  : 1;
     }
 
+    .el-menu-dark {
+        background : #222;
+        color      : #000 !important;
+    }
 </style>

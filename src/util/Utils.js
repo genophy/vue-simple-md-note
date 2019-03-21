@@ -1,5 +1,5 @@
-import * as Constants from './Constants';
-import CookieUtil     from './CookieUtil';
+import Constants  from './Constants';
+import CookieUtil from './CookieUtil';
 
 export default class Utils {
 

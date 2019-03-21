@@ -33,16 +33,16 @@
             <div class="flex-shrink m-v-10 flex-row align-items-center justify-content-space-between no-select">
                 <div class="flex-shrink flex-row align-items-center">
                     <div class="flex-row align-items-center m-r-10">
-                        <i class="el-icon-visibility"></i>
+                        <i class="el-icon-view"></i>
                         <span class="p-h-5 font-old-stamper font-size-18">{{itemInfo['watched']}}</span>
                     </div>
                 </div>
                 <div class="flex-shrink align-items-center">
-                    <button type="button" class="font-old-stamper font-size-16 bg-color-gray-light-soft tappable" mat-flat-button @click="btnDeleteBlogByBlogId(itemInfo['id'])"
+                    <button type="button" class="font-old-stamper font-size-16 bg-color-gray-light-soft tappable m-r-20" mat-flat-button @click="btnDeleteBlogByBlogId(itemInfo['id'])"
                             v-if="true === isForCurrentUser"> DELETE&nbsp;&gt;&gt;
                     </button>
 
-                    <button type="button" class="font-old-stamper font-size-16 bg-color-gray-light-soft tappable" mat-flat-button @click="gotoBlogDetailForEdit()" v-if="true === isForCurrentUser">
+                    <button type="button" class="font-old-stamper font-size-16 bg-color-gray-light-soft tappable m-r-20" mat-flat-button @click="gotoBlogDetailForEdit()" v-if="true === isForCurrentUser">
                         EDIT&nbsp;&gt;&gt;
                     </button>
 
@@ -59,9 +59,9 @@
 
 <script>
 
-  import VueMarkdown    from 'vue-markdown';
-  import * as Constants from '../util/Constants';
-  import CookieUtil     from '../util/CookieUtil';
+  import VueMarkdown from 'vue-markdown';
+  import Constants   from '../util/Constants';
+  import CookieUtil  from '../util/CookieUtil';
 
   export default {
     name : 'BlogListItem',
@@ -96,8 +96,30 @@
         this.$router.push(`/main/blog-md-viewer/${this.itemInfo['id']}`);
       },
       btnDeleteBlogByBlogId(blogId) {
-        // confirm , if delete
-        this._delBlogById(blogId);
+
+
+        this.$confirm('delete this blog?', 'Confirm', {
+          confirmButtonText: 'OK',
+          cancelButtonText: 'Cancel',
+          type: 'warning'
+        }).then(() => {
+          // confirm , if delete
+          this._delBlogById(blogId).then(()=>{
+            this.$message({
+              type: 'success',
+              message: 'delete success!'
+            });
+          })
+
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: 'user cancel!'
+          });
+        });
+
+
+
 
       },
       _delBlogById(blogId) {

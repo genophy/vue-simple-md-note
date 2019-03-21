@@ -17,7 +17,8 @@ export default class CookieUtil {
   static cookie(key, value = undefined, options = undefined) {
 
     if (value !== undefined && !CookieUtil.isFunction(value)) {
-      const opt = Object.assign({}, CookieUtil.config.defaults, options)
+      const opt = Object.assign({}, CookieUtil.config.defaults, options);
+
       // const docCookieStr =
       (document.cookie = [
         CookieUtil.encode(key), '=', CookieUtil.stringifyCookieValue(value),

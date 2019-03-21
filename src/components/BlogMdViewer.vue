@@ -20,7 +20,7 @@
             <div class="i-label">PART</div>
             <div>
                 <div class="flex-row align-items-center m-r-10">
-                    <i class="el-icon-visibility"></i>
+                    <i class="el-icon-view"></i>
                     <span class="p-h-5 font-old-stamper font-size-18">{{blogInfo['watched']}}</span>
                 </div>
             </div>
@@ -71,10 +71,10 @@
 <script>
 
 
-  import VueMarkdown    from 'vue-markdown';
-  import BlogService    from '../service/blog.service';
-  import * as Constants from '../util/Constants';
-  import CookieUtil     from '../util/CookieUtil';
+  import VueMarkdown from 'vue-markdown';
+  import BlogService from '../service/blog.service';
+  import Constants   from '../util/Constants';
+  import CookieUtil  from '../util/CookieUtil';
 
   export default {
     name      : 'BlogMdViewer',
@@ -93,8 +93,7 @@
       this.initPage();
     },
     methods   : {
-      async initPage() {
-
+      initPage() {
         const id = this.$route.params.id;
         const userInfo = JSON.parse(CookieUtil.cookie(Constants.COOKIE_USER_INFO) || '{}');
 
